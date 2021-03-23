@@ -19,6 +19,7 @@ namespace QuotesApi2021.Data
             base.OnModelCreating(modelBuilder);
             // https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#join-entity-type-configuration
             modelBuilder.Entity<Quote>().HasMany(q => q.Tags).WithMany(t => t.Quotes).UsingEntity<QuoteTag>(x => x.HasOne(qt => qt.Tag).WithMany().HasForeignKey(x => x.TagId), x => x.HasOne(qt => qt.Quote).WithMany().HasForeignKey(x => x.QuoteId));
+            
             modelBuilder.Entity<Tag>().HasData(new Tag { Id = 1, Text = "Werich, Jan", Type = TagType.Author });
             modelBuilder.Entity<Tag>().HasData(new Tag { Id = 2, Text = "Hloupost", Type = TagType.Theme });
             modelBuilder.Entity<Tag>().HasData(new Tag { Id = 3, Text = "cs", Type = TagType.Language });
